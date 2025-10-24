@@ -5,5 +5,48 @@ polyCube;
 // naming my cube dave
 rename "pCube1" Dave;
 // creating a sphere. 
+polySphere;
+//renaming the sphere alice
+rename "pSphere1" Alice;
+//Moves Alice up 1, relative to their current location
+move 0 1 0 "Alice";
+//Groups Dave and Alice into a new group called “Friends”
+select -r Dave;
+// select the dave and both
+select -tgl Alice;
+//group the both object
+doGroup 0 1 1;
+//rename the group friends
+rename "group1" Friends;
+//Rotate Friends 90 degrees relative to their current location
+rotate -r 90;
+//task 1 is complete
+// task 2 
+//Rotates all selected objects a random amount.
+// Select all objects in the scene
+select -all; 
+// Random rotation values between -180 and 180 degrees
+string $sel[] = `ls -sl`;
+for ($obj in $sel) {
+$rx = rand(-180, 180);
+$ry = rand(-180, 180);
+$rz = rand(-180, 180);
+//Create a UI that controls the upper and lower range.
+// now randomly rotating the object 
+rotate $rx $ry $rz $obj;
+}
+//task 2 is complete
+//task 3 
+// Creates a random object (either a cube, a sphere or a cylinder).
+// Create an array of shape commands
+string $shapes[] = {"polyCube", "polySphere", "polyCylinder"};
 
+// Pick a random index
+int $i = `rand 0 3`;
+
+// Build the command string
+string $cmd = $shapes[$i];
+
+// Evaluate it
+eval($cmd);
 
