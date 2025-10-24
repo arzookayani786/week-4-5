@@ -49,4 +49,22 @@ string $cmd = $shapes[$i];
 
 // Evaluate it
 eval($cmd);
+// task 3 is complete
+// task 4 
+//Creates a circle called “control” with a custom attribute “objScale” 
+circle;
+rename "nurbsCircle1" controlx;
+//setting attributes 
+addAttr -ln "objscale"  -at double  -dv 0 |"controlx";
+setAttr -e-keyable true |"controlx.objScale";
+// connecting the attributes to circle
+string $sel[] = `ls -sl`;
+for ($obj in $sel) {
+    // Create a group for the object
+    string $grp[] = `group -name ($obj + "_grp") $obj`;
 
+    // Connect control.objScale to group's scale channels
+    connectAttr -f "controlx.objScale" ($grp[0] + ".scaleX");
+    connectAttr -f "controlx.objScale" ($grp[0] + ".scaleY");
+    connectAttr -f "controlx.objScale" ($grp[0] + ".scaleZ");
+}
