@@ -1,0 +1,5 @@
+for ($i = 0; $i < 10; $i++) {
+    polySphere -name ("ball_" + $i);
+    move 0 0 ($i * 2);
+}
+print builderControl.moveAmount;
